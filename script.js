@@ -11,8 +11,12 @@ const btmbtn = document.querySelector("[data-bottom]");
 const updateDisplay = (num) => {
   let regexp = /[*-/+]/;
   let arr = topbtn.innerText.split("");
+
+  // -----checking whether pointer is used -------------
+
   if (/[.]/.test(btmbtn.innerText) && num.innerText === ".") {
   } else {
+    // ------------------checking toptext contains characters and end is a character------------
     if (regexp.test(topbtn.innerText) && !regexp.test(arr[arr.length - 1])) {
       topbtn.innerText = "";
       btmbtn.innerText += num.innerText;
@@ -27,8 +31,10 @@ const updateDisplay = (num) => {
 };
 
 const operations = (ope) => {
+  // -----------------if btm text is zero do nothing---------------
   if (btmbtn.innerText === "0" && btmbtn.innerText.length === 1) {
   } else {
+    // --------------if top text is empty------------
     if (topbtn.innerText === "") {
       topbtn.innerText += btmbtn.innerText + ope.innerText;
       btmbtn.innerText = "0";
@@ -42,6 +48,7 @@ const operations = (ope) => {
 };
 
 const deletekey = () => {
+  // ----------if btm text is non zero or top text is not empty-----------
   if (
     btmbtn.innerText !== "0" ||
     btmbtn.innerText.length !== 1 ||
