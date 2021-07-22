@@ -63,8 +63,11 @@ const deletekey = () => {
         topbtn.innerText = "";
         btmbtn.innerText = arr.join("");
       } else {
-        btmbtn.innerText = arr[arr.length - 1];
-        arr.pop();
+        let arr2 = [];
+        while (!regexp.test(arr[arr.length - 1])) {
+          arr2.unshift(arr.pop());
+        }
+        btmbtn.innerText = arr2.join("");
         topbtn.innerText = arr.join("");
       }
     } else {
