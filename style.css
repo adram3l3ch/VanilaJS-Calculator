@@ -41,9 +41,15 @@ body {
   color: rgba(255, 255, 255, 0.705);
 }
 
+.bottom {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
 .btns {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   height: 75%;
 }
 

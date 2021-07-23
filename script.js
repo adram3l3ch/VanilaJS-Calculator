@@ -14,7 +14,10 @@ const updateDisplay = (num) => {
 
   // -----checking whether pointer is used -------------
 
-  if (/[.]/.test(btmbtn.innerText) && num.innerText === ".") {
+  if (
+    (/[.]/.test(btmbtn.innerText) && num.innerText === ".") ||
+    btmbtn.innerText.length > 11
+  ) {
   } else {
     // ------------------checking toptext contains characters and end is a character------------
     if (regexp.test(topbtn.innerText) && !regexp.test(arr[arr.length - 1])) {
@@ -87,6 +90,7 @@ const find = () => {
   ) {
   } else {
     let regexp = /[*-/+]/;
+    let result;
     if (regexp.test(topbtn.innerText[topbtn.innerText.length - 1])) {
       let arr = topbtn.innerText.split("");
       let operation = arr[arr.length - 1];
@@ -96,23 +100,34 @@ const find = () => {
       topbtn.innerText += btmbtn.innerText;
       switch (operation) {
         case "/":
-          btmbtn.innerText = firstNum / secondNum;
+          result = firstNum / secondNum;
           break;
         case "*":
-          btmbtn.innerText = firstNum * secondNum;
+          result = firstNum * secondNum;
           break;
         case "+":
-          btmbtn.innerText = firstNum + secondNum;
+          result = firstNum + secondNum;
           break;
         case "-":
-          btmbtn.innerText = firstNum - secondNum;
+          result = firstNum - secondNum;
           break;
       }
+      resultString = `${result}`;
+      // -----------------converting result to scientific Notation---------------
+      if (resultString.length > 11) {
+        result = result / 10 ** (resultString.length - 1);
+        resultArray = `${result}`.split(".");
+        console.log(resultArray);
+        result = result.toFixed(8 - resultArray[0].length);
+        result = `${result}e${resultString.length - 1}`;
+      }
+
+      btmbtn.innerText = result;
     }
   }
 };
 
-// ---------------------------EvenListeners-------------------------------
+// ---------------------------EventListeners-------------------------------
 
 number.forEach((num) => {
   num.addEventListener("click", () => {
